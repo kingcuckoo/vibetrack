@@ -75,15 +75,16 @@ Goal: the app gets smarter the more you use it and corrections you make.
 
 ---
 
-## Open architectural decisions
+## Architectural decisions
 
-| Decision | Options | Status |
+| Decision | Choice | Notes |
 |---|---|---|
-| Photo storage | Local only vs. cloud (S3/Cloudflare R2) | TBD |
-| AI backend | Claude Vision, OpenAI GPT-4o, custom | TBD |
-| User accounts | Anonymous local vs. auth from day 1 | TBD |
-| Platform | iOS only vs. iOS + Android | TBD |
-| Video storage | Local only (size concern) vs. cloud | TBD |
+| Photo storage | On-device (`expo-file-system`) | Cloud storage as future paid tier |
+| AI backend | OpenAI GPT-4o vision + Claude | Images base64-encoded, sent to API |
+| User accounts | None for MVP | Add auth when cloud storage is introduced |
+| Platform | iOS + Android | Both from day one |
+| Video storage | On-device | Size management TBD (clip length limits) |
+| Metadata/annotations | SQLite on-device (`expo-sqlite`) | Stores AI output, corrections, categories |
 
 ---
 
