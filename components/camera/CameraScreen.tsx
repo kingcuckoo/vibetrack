@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import { StatusBar } from 'expo-status-bar';
 import CameraControls from './CameraControls';
@@ -35,10 +36,14 @@ export default function CameraScreen({ pagerIndex }: CameraScreenProps) {
     router.push('/annotation');
   };
 
+  const openGallery = () => router.push('/gallery');
+
   const swipeUpGesture = Gesture.Pan()
+    .activeOffsetY([-20, 20])
+    .failOffsetX([-20, 20])
     .onEnd((e) => {
-      if (e.velocityY < -600 && e.translationY < -50) {
-        router.push('/gallery');
+      if (e.velocityY < -400 && e.translationY < -40) {
+        runOnJS(openGallery)();
       }
     });
 

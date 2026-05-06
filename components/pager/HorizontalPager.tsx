@@ -25,6 +25,8 @@ export default function HorizontalPager({ pages, initialIndex = 1, onPageChange 
   });
 
   const pan = Gesture.Pan()
+    .activeOffsetX([-15, 15])
+    .failOffsetY([-30, 30])
     .onStart(() => {
       startX.value = offsetX.value;
     })
